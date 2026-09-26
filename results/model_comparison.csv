@@ -1,4 +1,4 @@
-model,run_id,test_accuracy,total_parameters,trainable_parameters,training_seconds,inference_ms_per_image,hardware,notes
-custom_cnn,,,,,,,,Pending training
-transfer_learning,,,,,,,,Pending training
-architecture_variant,,,,,,,,Optional; pending team decision
+model,notebook_model_number,selected_epoch,validation_accuracy,test_accuracy,total_parameters,trainable_parameters,training_seconds,inference_ms_per_image,hardware,notes
+small_custom_cnn,1,29,0.3333333333333333,,19717,19717,18.9,,T4 reported by notebook metadata; CUDA in saved output,Validation at minimum-loss checkpoint; trainable count derived from code; test evaluation pending
+deeper_custom_cnn,2,28,0.5333333333333333,,389701,389701,21.7,,T4 reported by notebook metadata; CUDA in saved output,Validation at minimum-loss checkpoint; trainable count derived from code; test evaluation pending
+resnet18_frozen_backbone,3,30,0.8,,11179077,2565,21.9,,T4 reported by notebook metadata; CUDA in saved output,Validation at minimum-loss checkpoint; trainable count derived from code; test evaluation pending

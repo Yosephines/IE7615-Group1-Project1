@@ -1,77 +1,77 @@
-# IE 7615 — Group 1 — Project 1
+# IE 7615 · Group 1 · Project 1
 
-Celebrity identification and detection using a discriminative computer-vision pipeline.
+Celebrity identification and detection with CelebA.
 
-## Milestone 1: Classification Baseline
+## Current work
 
-**Status:** Repository scaffold only. Dataset selection, training, and evaluation are pending.
-**Team:** Group 1
+[Dario's training notebook](notebooks/milestone01_team01_dario.ipynb) contains data preparation and completed training/validation runs for two custom CNNs and a pretrained ResNet18 classifier. It is the current implementation for Milestone 1.
 
-**Repository owner:** [Yosephines](https://github.com/Yosephines)
+The notebook uses **PyTorch / torchvision in Google Colab**, five identity IDs, and a shared balanced split. The introduction has been corrected to identity **4428** to match the code and saved outputs.
 
-**Framework:** To be confirmed by the team.
+**Held-out test evaluation is pending.** The following numbers are saved validation results at the checkpoint with the lowest validation loss, not test results:
 
-### Planned comparisons
-- Custom CNN trained from scratch (required).
-- ImageNet-pretrained model, such as ResNet (required).
-- Additional architecture or fine-tuning variant (recommended).
+| Architecture | Selected epoch | Validation accuracy | Total parameters | Reported training time |
+| --- | ---: | ---: | ---: | ---: |
+| Small CNN: 32, 64 channels | 29 | 33.33% | 19,717 | 18.9 s |
+| Deeper CNN: 32, 64, 128, 256 channels | 28 | 53.33% | 389,701 | 21.7 s |
+| ResNet18: frozen backbone, new classifier | 30 | 80.00% | 11,179,077 | 21.9 s |
 
-## Repository layout
+ResNet18 is the leading validation candidate. Final test metrics and the written carry-forward decision remain to be completed. See [training results](docs/training_results.md) for interpretation and limitations.
 
-| Path | Purpose |
+## Data
+
+Selected IDs, in classifier order: **7007, 2970, 2336, 7, 4428**.
+
+The saved run uses 23 images per identity: 17 training, 3 validation, and 3 test. Total: **85 training / 15 validation / 15 test images**. Test images are reserved but not evaluated in this notebook.
+
+See [dataset documentation](docs/dataset.md) for counts, transforms, and split details. Raw images and checkpoints are not stored in Git.
+
+## Repository contents
+
+| Location | Contents |
 | --- | --- |
-| `notebooks/01_data_preparation.ipynb` | Identity selection, preprocessing, and saved per-identity splits |
-| `notebooks/02_custom_cnn.ipynb` | Custom CNN training and evaluation |
-| `notebooks/03_transfer_learning.ipynb` | Pretrained baseline training and evaluation |
-| `notebooks/04_architecture_variant.ipynb` | Optional third comparison |
-| `src/` | Shared data, model, training, and evaluation code |
-| `configs/` | Versioned experiment settings |
-| `data/` | Local-only dataset; see its README |
-| `logs/` | Small CSV training logs and environment records |
-| `results/` | Model-comparison table and exported figures |
-| `models/` | Local-only checkpoints |
-| `docs/` | Proposal and training-results templates |
+| [notebooks/](notebooks/) | Dario's combined notebook and its handoff guide |
+| [configs/baseline.json](configs/baseline.json) | Settings transcribed from the notebook; a reference record, not an executable configuration |
+| [docs/dataset.md](docs/dataset.md) | Recorded identities, image counts, preprocessing, and missing split artifact |
+| [docs/training_results.md](docs/training_results.md) | Validation results and remaining evaluation work |
+| [docs/proposal.md](docs/proposal.md) | Updated proposal draft with unconfirmed team assignments marked |
+| [results/model_comparison.csv](results/model_comparison.csv) | Actual validation summary, with test and inference fields left empty |
+| [logs/](logs/) | Instructions for adding the existing training-history CSVs |
+| [data/](data/) | Local dataset placement guide |
+| [models/](models/) | Local checkpoint and team handoff guide |
 
-## Dataset and identities
+## Open and run
 
-Use 4–6 distinct CelebA identity IDs. Confirm names independently before associating them with IDs; do not infer a person's name from appearance. Record selection rationale, counts, and the class-to-index mapping in `docs/dataset.md`.
-
-Save one reproducible, per-identity train/validation/test split and reuse it for all architectures. Ensure no image appears in multiple splits. Apply random augmentation only to training data; keep validation/test transforms deterministic. Choose models and hyperparameters using validation results, then evaluate the final choices on the held-out test set.
-
-## Getting started
-
-1. Clone the private repository:
+1. Clone this private repository after accepting your collaborator invitation:
    ```sh
    git clone https://github.com/Yosephines/IE7615-Group1-Project1.git
    cd IE7615-Group1-Project1
    ```
-2. Choose the framework and record exact tested dependencies in `requirements.txt` or an environment file.
-3. Obtain CelebA through its authorized source and place files locally as described in `data/README.md`.
-4. Complete and run the data-preparation notebook, then the training notebooks in order.
-5. Save each run's configuration, seed, dependency versions, hardware, epoch metrics, training duration, and checkpoint location.
-6. Update `results/model_comparison.csv` and `docs/training_results.md` with actual measured results.
+2. Open `notebooks/milestone01_team01_dario.ipynb` in Google Colab. To view saved results, no training is necessary.
+3. To rerun, select a GPU runtime and set `DATA_DIR` to your Drive directory containing the five identity folders. Set `OUTPUT_DIR` to a checkpoint/output directory you control.
+4. Run the notebook from top to bottom. It mounts Google Drive and trains all three architectures for 30 epochs each. Reusing the same output directory overwrites the corresponding checkpoint/history filenames.
+5. Copy the three history CSVs into `logs/`. Keep checkpoints in shared team storage and document their locations.
 
-Notebook files are planning templates, not runnable training implementations yet. Add exact installation and execution commands here when the implementation is ready.
+The code imports torch, torchvision, pandas, Pillow, matplotlib, IPython, and google.colab. Exact package versions were not recorded in the supplied run, so a tested dependency lock file is still needed. The current notebook is Colab-specific.
 
-## Team workflow
+**Before evaluating existing checkpoints:** obtain the exact split manifest and checkpoints from Dario. The notebook builds the split in memory but does not export the `split.csv` mentioned in its narrative. Regenerating with the same seed only reproduces it if the original file inventory is unchanged. See the [handoff guide](notebooks/README.md).
 
-- Use a branch for each change and open a pull request into `main`.
-- Keep raw images, credentials, and model checkpoints out of Git.
-- Commit small training logs, loss/accuracy plots, comparison tables, and completed notebook artifacts.
-- Review notebook outputs for embedded dataset images and private local information before committing.
-- Record task owners and future milestone responsibilities in `docs/proposal.md`.
+## Remaining Milestone 1 work
 
-## Milestone 1 submission checklist
+- [ ] Obtain and commit the exact split manifest and three training-history CSVs.
+- [ ] Share the three selected checkpoints outside Git and record their checksums/locations.
+- [ ] Record tested dependency versions and hardware details.
+- [ ] Evaluate each selected checkpoint on the same held-out test split.
+- [ ] Add per-class accuracy or a confusion matrix and training-loss curves.
+- [ ] Complete the best-model justification using measured trade-offs.
+- [ ] Organize final deliverables into a data-preparation notebook and one training notebook per architecture, as required by the assignment.
+- [ ] Finalize team responsibilities and export the one-page proposal to PDF.
+- [ ] Finalize the 2–4-page training-results document.
+- [ ] Verify all teammates and teaching staff have accepted collaborator invitations.
+- [ ] Submit the private repository link, submission commit/tag, and documents through one team member.
 
-- [ ] Keep the repository private.
-- [ ] Invite all teammates and teaching staff with read/write access; verify accepted invitations.
-- [ ] Document 4–6 identities, counts, selection rationale, and preprocessing.
-- [ ] Complete data-preparation notebook and one training notebook per architecture.
-- [ ] Compare at least the custom CNN and transfer-learning baseline.
-- [ ] Report held-out test accuracy, parameter count, and training time.
-- [ ] Include per-class accuracy or a confusion matrix and training-loss curves.
-- [ ] Justify the model selected for Milestones 2 and 3.
-- [ ] Export the refreshed one-page proposal to PDF.
-- [ ] Complete the 2–4-page training-results document (PDF or Markdown export).
-- [ ] Record the submitted commit with `git rev-parse HEAD` or create a release tag.
-- [ ] Have one team member submit the repository link, commit/tag, and documents on Canvas.
+## Contributions
+
+Dario Garza (`TheMorrisGitHub`) contributed the combined training/validation notebook. Repository owner: [Yosephines](https://github.com/Yosephines).
+
+Use branches and pull requests for team changes. Commit code, small logs, configuration records, and figures; keep raw datasets, credentials, and checkpoint binaries out of Git.

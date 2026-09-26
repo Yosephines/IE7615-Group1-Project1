@@ -1,5 +1,16 @@
-# Local dataset storage
+# Local dataset
 
-Keep CelebA images and source identity annotations here locally. Dataset files in this folder are ignored by Git. Do not upload the dataset to the repository.
+The current notebook reads a Google Drive DATA_DIR containing these identity folders:
 
-Suggested local layout: `data/raw/` for original images and annotations, `data/processed/` for derived data, and `data/splits/` for generated manifests. Document acquisition, filenames, split-generation seed, and exact regeneration steps in `docs/dataset.md`. Keep reproducible split-generation code in the data-preparation notebook or `src/`.
+```text
+DATA_DIR/
+  7007/
+  2970/
+  2336/
+  7/
+  4428/
+```
+
+Each contains jpg/jpeg/png images. Point DATA_DIR to your own dataset location when running in Colab. See [dataset notes](../docs/dataset.md) for the saved counts and preprocessing.
+
+This repository does not contain images. Everything under this local data/ directory except this README is ignored. Store the recovered split manifest under configs/splits/ so it can be versioned without image files.
