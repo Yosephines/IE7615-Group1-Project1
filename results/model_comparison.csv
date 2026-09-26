@@ -1,0 +1,4 @@
+model,run_id,test_accuracy,total_parameters,trainable_parameters,training_seconds,inference_ms_per_image,hardware,notes
+custom_cnn,,,,,,,,Pending training
+transfer_learning,,,,,,,,Pending training
+architecture_variant,,,,,,,,Optional; pending team decision

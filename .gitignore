@@ -1,0 +1,41 @@
+# Credentials and local settings
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+# Python and notebooks
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+.pytest_cache/
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+# Datasets: keep only the local storage guide
+/data/*
+!/data/README.md
+# Checkpoints and binary experiment artifacts
+/models/*
+!/models/README.md
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.hdf5
+*.onnx
+*.safetensors
+*.pkl
+*.pickle
+*.zip
+*.tar
+*.gz
+# Local experiment services/caches
+wandb/
+mlruns/
+.cache/
+events.out.tfevents.*
