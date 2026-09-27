@@ -1,13 +1,11 @@
-# Training histories — awaiting handoff
+# Training logs
 
-Dario's notebook writes model_1_history.csv, model_2_history.csv, and model_3_history.csv to its Google Drive OUTPUT_DIR. These files have not yet been added to the repository.
+## Current report: group1_repro_v1
 
-Place copies in `logs/dario_baseline/`. Columns written by the notebook:
+Each architecture has a 30-row `*_history.csv` with full-precision training/validation loss and accuracy, plus a `*_run.json` containing settings, timing, environment and checkpoint hash. These are actual executed runs, not reconstructed curves.
 
-```text
-epoch,train_loss,train_accuracy,val_loss,val_accuracy
-```
+## Historical: aditi_5id
 
-Accuracies are fractions from 0 to 1. Use these CSVs to generate loss/accuracy plots under `results/figures/`. The saved notebook printouts do not contain loss values and are not substitutes for the original CSVs.
+`original/model_1_history.csv`, `model_2_history.csv` and `model_3_history.csv` preserve the uploaded CSV bytes from commit `c0f5920`. Named history files normalize their columns; `history_import.json` records matching and hashes. `rounded_epoch_accuracy.csv` is an older notebook-output extract, retained as supporting evidence.
 
-Keep histories here rather than under models/: checkpoint-directory contents are ignored by Git. Record exact dependency versions and hardware alongside the handed-off artifacts.
+Historical logs do not supply the current report's numbers. New experiments use a new run folder.

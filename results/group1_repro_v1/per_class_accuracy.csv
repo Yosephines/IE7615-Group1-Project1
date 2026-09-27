@@ -1,0 +1,16 @@
+architecture,identity,correct,test_images,accuracy
+small_custom_cnn,7007,0,3,0.0
+small_custom_cnn,2970,1,3,0.3333333333333333
+small_custom_cnn,2336,1,3,0.3333333333333333
+small_custom_cnn,7,0,3,0.0
+small_custom_cnn,4428,3,3,1.0
+deeper_custom_cnn,7007,0,3,0.0
+deeper_custom_cnn,2970,0,3,0.0
+deeper_custom_cnn,2336,2,3,0.6666666666666666
+deeper_custom_cnn,7,2,3,0.6666666666666666
+deeper_custom_cnn,4428,2,3,0.6666666666666666
+resnet18_frozen_backbone,7007,1,3,0.3333333333333333
+resnet18_frozen_backbone,2970,2,3,0.6666666666666666
+resnet18_frozen_backbone,2336,3,3,1.0
+resnet18_frozen_backbone,7,3,3,1.0
+resnet18_frozen_backbone,4428,1,3,0.3333333333333333

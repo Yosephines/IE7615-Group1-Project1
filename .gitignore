@@ -16,7 +16,7 @@ venv/
 .idea/
 .DS_Store
 Thumbs.db
-# Datasets: keep only the local storage guide
+# Datasets: ignore new sets; explicit fixed-subset exception below
 /data/*
 !/data/README.md
 # Checkpoints and binary experiment artifacts
@@ -39,3 +39,12 @@ wandb/
 mlruns/
 .cache/
 events.out.tfevents.*
+
+# Local report rendering and QA
+/tmp/
+
+# Self-contained, fixed Milestone 1 subset and trained artifacts
+!/data/identities/
+!/data/identities/**
+!/models/group1_repro_v1/
+!/models/group1_repro_v1/*.pt

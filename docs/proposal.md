@@ -1,33 +1,33 @@
-# IE 7615 · Group 1 · Project 1 proposal
+# Project 1 proposal
 
-**Updated draft — team confirmation and one-page PDF export pending.**
+Team: Yosephine Tong, Dario Garza and Aditi. IE 7615, Group 1.
 
-## Objective and subset
+## What we are building
 
-Build a discriminative pipeline for celebrity identification and detection, beginning with single-face classification. The current baseline uses CelebA identity IDs 7007, 2970, 2336, 7, and 4428. It balances 23 images per identity, with 17 training, 3 validation, and 3 held-out test examples per class. Identity names and the broader selection rationale still require team confirmation.
+We are building a system that identifies which of five celebrities appears in a photo. Later milestones will add the ability to find several faces in one image. We use Python with PyTorch and torchvision to build and train the models.
 
-## Framework and approach
+## Our photos
 
-The existing implementation uses PyTorch/torchvision in Google Colab. Dario has trained a small custom CNN, a deeper custom CNN, and an ImageNet-pretrained ResNet18 with a frozen backbone and trainable five-class head. The selected checkpoints achieve 33.33%, 53.33%, and 80.00% validation accuracy. Test evaluation remains pending.
+We use CelebA identity IDs 7007, 2970, 2336, 7 and 4428. Each folder has enough photos to use 23 per person: 17 for learning, 3 for choosing the best model, and 3 for the final test. Using the same number of photos per person keeps the comparison balanced.
 
-ResNet18 is the leading validation candidate for the later detection milestones. The team will finalize its choice with documented trade-offs and report held-out test evaluation.
+## What we found
 
-## Responsibilities
+We compared three image-recognition models. ResNet18 identified the correct person in 10 of 15 test photos (66.7%). The deeper CNN got 6 correct (40.0%), and the small CNN got 5 correct (33.3%).
 
-| Member | Contribution or assignment | Next milestone |
-| --- | --- | --- |
-| Dario Garza (TheMorrisGitHub) | Contributed the data preparation and three-model training/validation notebook | To be assigned by team |
-| Yosephines | Repository owner; coordination of repository setup | To be assigned by team |
-| Remaining team members | Names and evaluation/report responsibilities to be confirmed | To be assigned by team |
+ResNet18 also performed best on validation. We will use it in the next stages of the project. All trained models and the files needed to check our results are included.
 
-## Risks and planned mitigations
+## Team contributions
 
-- Small evaluation sets: report class counts and avoid overstating accuracy differences.
-- Split reproducibility: recover and version the exact split manifest before checkpoint evaluation.
-- Missing handoff artifacts: collect history CSVs and share checkpoints with the team.
-- Overfitting/data limitations: compare scratch and pretrained models using a shared protocol.
-- Transition to detection: confirm annotation needs and compute requirements for Milestone 2.
+| Member | Milestone 1 work |
+| --- | --- |
+| Dario | Prepared the initial data and model-training notebook |
+| Aditi | Evaluated models, compared results and shared training logs |
+| Yosephine | Organized the repository, repeated training and prepared reports |
 
-## Items to confirm
+## Next steps
 
-Compare with the original Module 1 proposal to describe actual changes; that proposal was not available during this update. Confirm all team members, final identity rationale, division of labor, and the carry-forward model before exporting the final one-page PDF.
+Milestone 2 (end of Module 4): combine celebrity photos into new images and label each face with a box. Milestone 3 (mid-Module 5): train YOLOv8 to find those faces. Milestone 4 (end of Module 6): bring the system together and complete the final report.
+
+## Main risks
+
+Our small dataset may not represent the photos the system will see later. Combined images may also look different from real scenes. We will keep training and test images separate and check the face labels carefully.

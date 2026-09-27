@@ -1,0 +1,101 @@
+{
+  "run_id": "group1_repro_v1",
+  "architecture": "resnet18_frozen_backbone",
+  "epochs": 30,
+  "seed": 47,
+  "batch_size": 16,
+  "learning_rate": 0.001,
+  "ids": [
+    "7007",
+    "2970",
+    "2336",
+    "7",
+    "4428"
+  ],
+  "device": "cpu",
+  "pretrained": true,
+  "selected_epoch": 28,
+  "validation_accuracy": 0.8,
+  "training_seconds": 115.76295869995374,
+  "total_parameters": 11179077,
+  "trainable_parameters": 2565,
+  "manifest_sha256": "a4c1ecb50ce5a24e63f85296759c9d7d5de4e065de81971d4bfe949520d8e0b7",
+  "checkpoint_sha256": "e3a8199480649cf8a63b64c0be0491bd4efa45d3d46fa6bab63757b63d8693b3",
+  "environment": {
+    "python": "3.13.9",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "torch": "2.14.0+cpu",
+    "torchvision": "0.29.0+cpu",
+    "pandas": "3.0.6",
+    "matplotlib": "3.11.2",
+    "pillow": "12.3.0",
+    "gpu": null
+  },
+  "cpu_threads": 2,
+  "deterministic_algorithms": true,
+  "pipeline_sha256": "8d46187f1c8a28b2ec27eba42d2157ddc73e6fda1a10a1a875b0ce320f96d7e7",
+  "preprocessing": {
+    "resize": 256,
+    "crop": 224,
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "test_images": 15,
+  "test_correct": 10,
+  "test_accuracy": 0.6666666666666666,
+  "per_class_accuracy": {
+    "7007": 0.3333333333333333,
+    "2970": 0.6666666666666666,
+    "2336": 1.0,
+    "7": 1.0,
+    "4428": 0.3333333333333333
+  },
+  "confusion_matrix": [
+    [
+      1,
+      1,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      2,
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      3,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      3,
+      0
+    ],
+    [
+      0,
+      2,
+      0,
+      0,
+      1
+    ]
+  ],
+  "inference_ms_per_image": 35.25050001917407,
+  "timing_protocol": "CPU, 2 threads, batch size 1; one warm-up pass, median of 5 full test passes; forward pass only",
+  "hardware": "Intel Core i7-7700K CPU @ 4.20 GHz"
+}

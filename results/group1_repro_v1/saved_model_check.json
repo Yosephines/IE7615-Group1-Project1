@@ -1,0 +1,25 @@
+{
+  "run_id": "group1_repro_v1",
+  "images_verified": 121,
+  "split_images": 115,
+  "model_checks": [
+    {
+      "architecture": "small_custom_cnn",
+      "checkpoint_sha256": "32f537d8e6e8a2f783ef9170390b390ce9c8ff8f8d496edab9218aab3212d0e6",
+      "test_correct": 5,
+      "predictions_match": true
+    },
+    {
+      "architecture": "deeper_custom_cnn",
+      "checkpoint_sha256": "b2c320c6c95ff8ae0ce26cbd67ec9270a1339100ba03a2d437985e03f61433c8",
+      "test_correct": 6,
+      "predictions_match": true
+    },
+    {
+      "architecture": "resnet18_frozen_backbone",
+      "checkpoint_sha256": "e3a8199480649cf8a63b64c0be0491bd4efa45d3d46fa6bab63757b63d8693b3",
+      "test_correct": 10,
+      "predictions_match": true
+    }
+  ]
+}

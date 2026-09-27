@@ -1,7 +1,10 @@
-# Recorded baseline settings
+# Configuration and provenance
 
-[baseline.json](baseline.json) transcribes settings from Dario's current notebook. It documents the existing run; the notebook does not load this file.
+- `group1_repro_v1.json`: settings and artifact pointers for the current report.
+- `dataset_source.json`: all 121 image names, source IDs and content hashes.
+- `splits/group1_repro_v1_seed47.csv`: the exact 115-image training/validation/test split.
+- `reproduction_environment.txt`: complete Python package versions from the actual Windows CPU run. Python was 3.13.9. Install with the PyTorch CPU extra index shown in the main README.
+- `original_contributions.json`: byte-preservation hashes for the two original notebooks and three uploaded history CSVs.
+- `baseline.json`: historical settings extracted from Dario's original notebook; retained as a reference.
 
-The split manifest is **not yet available**. When recovered, commit it as `splits/milestone1_seed47.csv` with relative image paths, identity IDs, and train/val/test assignments. Keep image files outside Git.
-
-Class index order is recorded in baseline.json. Use the checkpoint's IDs to verify the mapping during evaluation. Future executable configurations should be added only when code actually consumes them.
+Per-model `logs/group1_repro_v1/*_run.json` records the environment, pipeline hash, seed, parameter counts and selected checkpoint hash. The `pretrained` argument in these raw records only affects ResNet18; both custom CNNs are initialized from scratch.

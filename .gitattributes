@@ -3,3 +3,15 @@
 *.py text eol=lf
 *.md text eol=lf
 *.csv text eol=lf
+
+*.pt binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+
+# Preserve byte-level provenance across checkout platforms.
+/configs/splits/*.csv -text
+/logs/aditi_5id/original/*.csv -text
+/src/pipeline.py -text
+/notebooks/milestone*.ipynb -text
+*.pdf binary

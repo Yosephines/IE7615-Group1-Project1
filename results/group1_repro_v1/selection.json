@@ -1,0 +1,5 @@
+{
+  "selected_model": "resnet18_frozen_backbone",
+  "criterion": "highest validation accuracy at minimum-validation-loss checkpoint; ties use MODEL_NAMES order",
+  "selected_before_test_evaluation": true
+}

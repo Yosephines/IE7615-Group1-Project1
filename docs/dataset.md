@@ -1,45 +1,47 @@
-# Milestone 1 dataset
+# Dataset and split
 
-Source of counts and settings: saved outputs and code in [Dario's notebook](../notebooks/milestone01_team01_dario.ipynb). Dataset images were not independently inspected during repository cleanup.
+We use five CelebA identity folders from the shared class dataset. IDs are the folder labels; celebrity names have not been independently verified. The folders were available to the team and each had enough images for a balanced experiment.
 
-## Identity subset
+| Identity | Available | Train | Validation | Test | Unused |
+| --- | --- | --- | --- | --- | --- |
+| 7007 | 24 | 17 | 3 | 3 | 1 |
+| 2970 | 25 | 17 | 3 | 3 | 2 |
+| 2336 | 25 | 17 | 3 | 3 | 2 |
+| 7 | 24 | 17 | 3 | 3 | 1 |
+| 4428 | 23 | 17 | 3 | 3 | 0 |
+| Total | 121 | 85 | 15 | 15 | 6 |
 
-| Class index | CelebA identity ID | Available images | Selected | Training | Validation | Test |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
-| 0 | 7007 | 24 | 23 | 17 | 3 | 3 |
-| 1 | 2970 | 25 | 23 | 17 | 3 | 3 |
-| 2 | 2336 | 25 | 23 | 17 | 3 | 3 |
-| 3 | 7 | 24 | 23 | 17 | 3 | 3 |
-| 4 | 4428 | 23 | 23 | 17 | 3 | 3 |
-| **Total** | | **121** | **115** | **85** | **15** | **15** |
+The output class order is **7007, 2970, 2336, 7, 4428**. The correct fifth ID is 4428, not the earlier introduction typo 4438.
 
-The notebook selects five available labeled folders, checks a minimum of 20 images each, and balances classes to the smallest folder count. Six available images are excluded. Celebrity names and visual-diversity claims have not been verified. Document label provenance against the original CelebA identity annotation before final submission.
+## Original contributors
 
-The original introduction's 4438 was a typo. The code, saved outputs, and shared Drive folder listing use 4428; only the introduction was corrected.
+These identities come from the shared class collection. The class claim sheet supplied by Yosephine lists the following contributors; they are not the membership list for this project team.
 
-## Split procedure
+| Identity ID | Claimed by | Group |
+| --- | --- | --- |
+| 7007 | Mus Ab Irfan Yilmaz | 3 |
+| 2970 | Rhea Paul | 3 |
+| 2336 | Masato Kan | 3 |
+| 7 | Jin-woo Hong | 2 |
+| 4428 | David Fung | 4 |
 
-For each identity, the notebook sorts the relative image paths, shuffles with `random.Random(47 + int(identity))`, selects 23 images, then partitions them. Validation/test counts use `round(23 * 0.15)` and training receives the remainder.
+## Sources
 
-The intended proportions are 70/15/15; actual proportions are about 73.9/13.0/13.0 because of rounding. All three models share the same in-memory manifest.
+Images are included under `data/identities`. The [source inventory](../configs/dataset_source.json) records each file, identity, SHA-256, Drive file ID and acquisition source.
 
-**Missing artifact:** despite mentioning a saved split.csv, the current notebook never writes the manifest. Obtain the original runtime manifest or recover it from the unchanged original file inventory. Store the exact manifest at `configs/splits/milestone1_seed47.csv` and load it in subsequent notebooks. That path is reserved; the file has not been supplied.
+- [Shared class Drive](https://drive.google.com/drive/folders/1oFdEmVjo5uy-xsM2fNscKQQKhe8pU30P): identity assignments and filenames.
+- [CelebA mirror, version 2](https://www.kaggle.com/datasets/jessicali9530/celeba-dataset/versions/2): exact filenames used when Drive downloads stalled. Reference image `005770.jpg` was compared across sources and matched byte for byte.
 
-Check duplicate paths and image-content duplicates across splits. Split generation by list slicing separates entries but does not detect duplicate image content under different filenames.
+All 121 images were decoded and checked for duplicate content. Their recorded hashes now fix the data version. This is a small private course subset, not a redistribution of the full dataset.
+
+## How the split is made
+
+Sort filenames within each folder, shuffle with `random.Random(47 + identity)`, then retain 23 per identity. The first 17 are training, the next 3 validation, and the last 3 test. The resulting ratio is 73.9% / 13.0% / 13.0%; six remaining images are unused.
+
+The [manifest](../configs/splits/group1_repro_v1_seed47.csv) records every selected filename, identity, split and hash. The pipeline rejects duplicate bytes, missing files, changed content and an attempt to replace an existing split. All architectures use this one manifest. Byte checks do not rule out visually near-duplicate photos.
 
 ## Preprocessing
 
-All images are converted to RGB.
+Convert to RGB. Training uses `RandomResizedCrop(224, scale=(0.85, 1.0))` and random horizontal flips. Validation/test use resize-to-256 on the shorter edge followed by a 224 center crop. Normalize with mean `(0.485, 0.456, 0.406)` and standard deviation `(0.229, 0.224, 0.225)`.
 
-- Training: RandomResizedCrop(224, scale=(0.85, 1.0)), random horizontal flip, tensor conversion, normalization.
-- Validation: resize shorter edge to 256, center crop 224, tensor conversion, normalization.
-- Mean: [0.485, 0.456, 0.406]; standard deviation: [0.229, 0.224, 0.225].
-- Planned test evaluation should reuse deterministic validation transforms; no test loader currently exists.
-
-## Reproduction and limits
-
-The notebook reads jpg/jpeg/png files recursively from identity-named folders in Google Drive. Team members must configure their own DATA_DIR; folder contents must match the original inventory to reproduce the split.
-
-Only 15 validation and 15 test examples exist. One prediction changes overall accuracy by 6.67 percentage points; each class has three evaluation examples. Report these counts alongside results.
-
-Still needed: dataset source/version and annotation provenance, exact shared manifest, duplicate checks, and the team's fuller identity-selection rationale.
+The new run creates its own complete record. It does not claim to reconstruct Aditi's original file ordering or training environment.

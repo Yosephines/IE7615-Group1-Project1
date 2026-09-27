@@ -23,7 +23,7 @@
     "val": 3,
     "test": 3
   },
-  "split_manifest_status": "not exported by current notebook; exact manifest must be recovered",
+  "split_manifest_status": "Historical notebook did not export its manifest. The current submission uses configs/splits/group1_repro_v1_seed47.csv; no historical handoff is required.",
   "epochs": 30,
   "batch_size": 16,
   "optimizer": {

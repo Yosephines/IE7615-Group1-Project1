@@ -1,0 +1,101 @@
+{
+  "run_id": "group1_repro_v1",
+  "architecture": "small_custom_cnn",
+  "epochs": 30,
+  "seed": 47,
+  "batch_size": 16,
+  "learning_rate": 0.001,
+  "ids": [
+    "7007",
+    "2970",
+    "2336",
+    "7",
+    "4428"
+  ],
+  "device": "cpu",
+  "pretrained": true,
+  "selected_epoch": 30,
+  "validation_accuracy": 0.26666666666666666,
+  "training_seconds": 92.02614129998256,
+  "total_parameters": 19717,
+  "trainable_parameters": 19717,
+  "manifest_sha256": "a4c1ecb50ce5a24e63f85296759c9d7d5de4e065de81971d4bfe949520d8e0b7",
+  "checkpoint_sha256": "32f537d8e6e8a2f783ef9170390b390ce9c8ff8f8d496edab9218aab3212d0e6",
+  "environment": {
+    "python": "3.13.9",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "torch": "2.14.0+cpu",
+    "torchvision": "0.29.0+cpu",
+    "pandas": "3.0.6",
+    "matplotlib": "3.11.2",
+    "pillow": "12.3.0",
+    "gpu": null
+  },
+  "cpu_threads": 2,
+  "deterministic_algorithms": true,
+  "pipeline_sha256": "8d46187f1c8a28b2ec27eba42d2157ddc73e6fda1a10a1a875b0ce320f96d7e7",
+  "preprocessing": {
+    "resize": 256,
+    "crop": 224,
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "test_images": 15,
+  "test_correct": 5,
+  "test_accuracy": 0.3333333333333333,
+  "per_class_accuracy": {
+    "7007": 0.0,
+    "2970": 0.3333333333333333,
+    "2336": 0.3333333333333333,
+    "7": 0.0,
+    "4428": 1.0
+  },
+  "confusion_matrix": [
+    [
+      0,
+      3,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      1,
+      0,
+      1
+    ],
+    [
+      2,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      3
+    ]
+  ],
+  "inference_ms_per_image": 11.531999974977225,
+  "timing_protocol": "CPU, 2 threads, batch size 1; one warm-up pass, median of 5 full test passes; forward pass only",
+  "hardware": "Intel Core i7-7700K CPU @ 4.20 GHz"
+}

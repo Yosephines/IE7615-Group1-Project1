@@ -1,16 +1,9 @@
-# Local dataset
+# Data
 
-The current notebook reads a Google Drive DATA_DIR containing these identity folders:
+`identities/` contains the 121 images used for the fresh Group 1 experiment. The split uses 115 of them; six are unused after balancing.
 
-```text
-DATA_DIR/
-  7007/
-  2970/
-  2336/
-  7/
-  4428/
-```
+See [dataset notes](../docs/dataset.md), [source inventory](../configs/dataset_source.json) and [split manifest](../configs/splits/group1_repro_v1_seed47.csv).
 
-Each contains jpg/jpeg/png images. Point DATA_DIR to your own dataset location when running in Colab. See [dataset notes](../docs/dataset.md) for the saved counts and preprocessing.
+No download is needed after cloning this version. If a file is missing, `python scripts/download_dataset.py` restores the recorded subset and checks exact hashes; it requires network access and the original sources to remain available.
 
-This repository does not contain images. Everything under this local data/ directory except this README is ignored. Store the recovered split manifest under configs/splits/ so it can be versioned without image files.
+Keep future large datasets outside Git and document their versions, storage locations and checksums. The current small fixed subset is intentionally included for TA review.

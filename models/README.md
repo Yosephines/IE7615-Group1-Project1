@@ -1,9 +1,9 @@
-# Checkpoints — awaiting handoff
+# Saved models
 
-Dario's notebook saves model_1.pt (small CNN), model_2.pt (deeper CNN), and model_3.pt (ResNet18) at the minimum validation loss for each run.
+The three selected checkpoints in `group1_repro_v1/` are included in this private repository. Each file contains a state dictionary, class order, architecture, selected epoch, run ID and split hash.
 
-Each checkpoint contains `state_dict`, `ids`, and `model_number`. The supplied notebook does not embed these files, and they are not yet available in this repository.
+**Carry forward:** `group1_repro_v1/resnet18_frozen_backbone.pt`, epoch 28. See the [model handoff](../docs/best_model_handoff.md) for loading and preprocessing.
 
-Keep checkpoints in shared team storage or locally in this ignored folder. Record storage links and SHA-256 checksums in docs/training_results.md once obtained. Preserve class order and use the exact original split during evaluation.
+The two custom CNNs start from scratch. ResNet18 uses torchvision ImageNet weights with a frozen backbone and a trained five-class output layer. In raw checkpoint metadata, the `pretrained` argument is passed to all model constructors but has an effect only on ResNet18.
 
-The notebook also writes history CSVs to its checkpoint output directory; move copies of those CSVs to the tracked logs/ directory.
+All files are below GitHub's 100 MB per-file limit. New model runs are ignored by default; intentionally add only the selected artifacts needed for a milestone.

@@ -1,77 +1,65 @@
 # IE 7615 · Group 1 · Project 1
 
-Celebrity identification and detection with CelebA.
+**Team:** Yosephine Tong, Dario Garza and Aditi
 
-## Current work
+We are building a system that identifies celebrities in photos. For Milestone 1, we trained three models to recognize five people from the CelebA dataset.
 
-[Dario's training notebook](notebooks/milestone01_team01_dario.ipynb) contains data preparation and completed training/validation runs for two custom CNNs and a pretrained ResNet18 classifier. It is the current implementation for Milestone 1.
+## Celebrity subset
 
-The notebook uses **PyTorch / torchvision in Google Colab**, five identity IDs, and a shared balanced split. The introduction has been corrected to identity **4428** to match the code and saved outputs.
+We selected five identities from the shared class collection, with enough photos to use the same number for each person. The table credits the classmates who claimed these identities in the class sheet.
 
-**Held-out test evaluation is pending.** The following numbers are saved validation results at the checkpoint with the lowest validation loss, not test results:
+| Identity ID | Available photos | Claimed by | Group |
+| --- | --- | --- | --- |
+| 7007 | 24 | Mus Ab Irfan Yilmaz | 3 |
+| 2970 | 25 | Rhea Paul | 3 |
+| 2336 | 25 | Masato Kan | 3 |
+| 7 | 24 | Jin-woo Hong | 2 |
+| 4428 | 23 | David Fung | 4 |
 
-| Architecture | Selected epoch | Validation accuracy | Total parameters | Reported training time |
-| --- | ---: | ---: | ---: | ---: |
-| Small CNN: 32, 64 channels | 29 | 33.33% | 19,717 | 18.9 s |
-| Deeper CNN: 32, 64, 128, 256 channels | 28 | 53.33% | 389,701 | 21.7 s |
-| ResNet18: frozen backbone, new classifier | 30 | 80.00% | 11,179,077 | 21.9 s |
+We use 23 photos per person: 17 for training, 3 for validation and 3 for testing. Six remaining photos are unused.
 
-ResNet18 is the leading validation candidate. Final test metrics and the written carry-forward decision remain to be completed. See [training results](docs/training_results.md) for interpretation and limitations.
+## Results
 
-## Data
+| Model | Correct test predictions | Accuracy |
+| --- | --- | --- |
+| Small CNN | 5 of 15 | 33.3% |
+| Deeper CNN | 6 of 15 | 40.0% |
+| ResNet18 | 10 of 15 | 66.7% |
 
-Selected IDs, in classifier order: **7007, 2970, 2336, 7, 4428**.
+We chose **ResNet18** because it also did best on the separate validation photos used to select a model. It builds on earlier training with a large image dataset. The two custom CNNs learn from our photos from the start.
 
-The saved run uses 23 images per identity: 17 training, 3 validation, and 3 test. Total: **85 training / 15 validation / 15 test images**. Test images are reserved but not evaluated in this notebook.
+Our test set is small, so these results are a starting point. We need more photos to judge how well the model works in different conditions.
 
-See [dataset documentation](docs/dataset.md) for counts, transforms, and split details. Raw images and checkpoints are not stored in Git.
+## Read the reports
 
-## Repository contents
+- [Project proposal — 1 page](output/pdf/group1_proposal.pdf)
+- [Training results — 3 pages](output/pdf/group1_training_results.pdf) · [Read as Markdown](docs/training_results.md)
+- [Dataset details](docs/dataset.md) · [Full comparison table](results/model_comparison.csv)
 
-| Location | Contents |
+## Open the notebooks in order
+
+All five contain completed results.
+
+1. [Prepare the data](notebooks/01_data_preparation.ipynb) — divide photos into training, validation and test groups.
+2. [Train the small CNN](notebooks/02_small_custom_cnn.ipynb).
+3. [Train ResNet18](notebooks/03_resnet18_frozen_backbone.ipynb).
+4. [Train the deeper CNN](notebooks/04_deeper_custom_cnn.ipynb).
+5. [Compare the models](notebooks/05_evaluation_and_comparison.ipynb) — choose using validation, then measure test accuracy.
+
+## Check or repeat the work
+
+The photos, saved models, training logs and test predictions are included.
+
+Follow the [setup and run instructions](docs/reproducing_results.md). They explain how to check the saved models without training, or train all three again while keeping the submitted results.
+
+The current experiment is named `group1_repro_v1`. Files are organized as follows:
+
+| Folder | What it contains |
 | --- | --- |
-| [notebooks/](notebooks/) | Dario's combined notebook and its handoff guide |
-| [configs/baseline.json](configs/baseline.json) | Settings transcribed from the notebook; a reference record, not an executable configuration |
-| [docs/dataset.md](docs/dataset.md) | Recorded identities, image counts, preprocessing, and missing split artifact |
-| [docs/training_results.md](docs/training_results.md) | Validation results and remaining evaluation work |
-| [docs/proposal.md](docs/proposal.md) | Updated proposal draft with unconfirmed team assignments marked |
-| [results/model_comparison.csv](results/model_comparison.csv) | Actual validation summary, with test and inference fields left empty |
-| [logs/](logs/) | Instructions for adding the existing training-history CSVs |
-| [data/](data/) | Local dataset placement guide |
-| [models/](models/) | Local checkpoint and team handoff guide |
+| `data/identities/` | 121 photos; 115 are used after balancing the five people |
+| `configs/` | Photo lists, training settings and software versions |
+| `notebooks/`, `src/`, `scripts/` | Notebooks, shared code and commands to run the project |
+| `models/`, `logs/`, `results/` | Trained models, training records, scores and charts |
+| `docs/`, `output/pdf/` | Written explanations and submission reports |
 
-## Open and run
-
-1. Clone this private repository after accepting your collaborator invitation:
-   ```sh
-   git clone https://github.com/Yosephines/IE7615-Group1-Project1.git
-   cd IE7615-Group1-Project1
-   ```
-2. Open `notebooks/milestone01_team01_dario.ipynb` in Google Colab. To view saved results, no training is necessary.
-3. To rerun, select a GPU runtime and set `DATA_DIR` to your Drive directory containing the five identity folders. Set `OUTPUT_DIR` to a checkpoint/output directory you control.
-4. Run the notebook from top to bottom. It mounts Google Drive and trains all three architectures for 30 epochs each. Reusing the same output directory overwrites the corresponding checkpoint/history filenames.
-5. Copy the three history CSVs into `logs/`. Keep checkpoints in shared team storage and document their locations.
-
-The code imports torch, torchvision, pandas, Pillow, matplotlib, IPython, and google.colab. Exact package versions were not recorded in the supplied run, so a tested dependency lock file is still needed. The current notebook is Colab-specific.
-
-**Before evaluating existing checkpoints:** obtain the exact split manifest and checkpoints from Dario. The notebook builds the split in memory but does not export the `split.csv` mentioned in its narrative. Regenerating with the same seed only reproduces it if the original file inventory is unchanged. See the [handoff guide](notebooks/README.md).
-
-## Remaining Milestone 1 work
-
-- [ ] Obtain and commit the exact split manifest and three training-history CSVs.
-- [ ] Share the three selected checkpoints outside Git and record their checksums/locations.
-- [ ] Record tested dependency versions and hardware details.
-- [ ] Evaluate each selected checkpoint on the same held-out test split.
-- [ ] Add per-class accuracy or a confusion matrix and training-loss curves.
-- [ ] Complete the best-model justification using measured trade-offs.
-- [ ] Organize final deliverables into a data-preparation notebook and one training notebook per architecture, as required by the assignment.
-- [ ] Finalize team responsibilities and export the one-page proposal to PDF.
-- [ ] Finalize the 2–4-page training-results document.
-- [ ] Verify all teammates and teaching staff have accepted collaborator invitations.
-- [ ] Submit the private repository link, submission commit/tag, and documents through one team member.
-
-## Contributions
-
-Dario Garza (`TheMorrisGitHub`) contributed the combined training/validation notebook. Repository owner: [Yosephines](https://github.com/Yosephines).
-
-Use branches and pull requests for team changes. Commit code, small logs, configuration records, and figures; keep raw datasets, credentials, and checkpoint binaries out of Git.
+Dario's and Aditi's original notebooks are preserved. Aditi's earlier results are kept under `aditi_5id`, separate from the results above.
