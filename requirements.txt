@@ -1,4 +1,4 @@
-# Tested on Python 3.13.9, CPU. Full environment: configs/reproduction_environment.txt
+# Tested on Python 3.13.9, CPU. Full environment: project/configs/reproduction_environment.txt
 --extra-index-url https://download.pytorch.org/whl/cpu
 torch==2.14.0+cpu
 torchvision==0.29.0+cpu
@@ -10,6 +10,3 @@ nbclient==0.11.0
 ipykernel==7.3.0
 reportlab==5.0.1
 pypdf==6.19.0
-# Optional dataset recovery (the 121 images are included)
-gdown==6.4.0
-kagglehub==1.0.2

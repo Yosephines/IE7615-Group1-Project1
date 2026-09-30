@@ -1,9 +1,10 @@
-# Data
+# Photos
 
-`identities/` contains the 121 images used for the fresh Group 1 experiment. The split uses 115 of them; six are unused after balancing.
+`identities/` contains the 121 photos from the shared class collection. We use 23 per identity: 17 training, 3 validation and 3 test photos. Six photos are unused.
 
-See [dataset notes](../docs/dataset.md), [source inventory](../configs/dataset_source.json) and [split manifest](../configs/splits/group1_repro_v1_seed47.csv).
+The identities and contributor credits are listed in the [main README](../README.md).
 
-No download is needed after cloning this version. If a file is missing, `python scripts/download_dataset.py` restores the recorded subset and checks exact hashes; it requires network access and the original sources to remain available.
+- [Image inventory](../project/configs/dataset_source.json): source locations and file checksums.
+- [Saved split](../project/configs/splits/group1_repro_v1_seed47.csv): the exact 115 photos used for training, validation and testing.
 
-Keep future large datasets outside Git and document their versions, storage locations and checksums. The current small fixed subset is intentionally included for TA review.
+All photos needed for this experiment are included. The saved models expect RGB images cropped to 224 x 224 pixels with ImageNet normalization; the notebooks apply this automatically.

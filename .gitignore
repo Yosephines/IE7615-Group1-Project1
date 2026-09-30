@@ -20,8 +20,8 @@ Thumbs.db
 /data/*
 !/data/README.md
 # Checkpoints and binary experiment artifacts
-/models/*
-!/models/README.md
+/project/models/*
+!/project/models/README.md
 *.pt
 *.pth
 *.ckpt
@@ -46,5 +46,5 @@ events.out.tfevents.*
 # Self-contained, fixed Milestone 1 subset and trained artifacts
 !/data/identities/
 !/data/identities/**
-!/models/group1_repro_v1/
-!/models/group1_repro_v1/*.pt
+!/project/models/group1_repro_v1/
+!/project/models/group1_repro_v1/*.pt

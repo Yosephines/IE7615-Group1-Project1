@@ -10,8 +10,8 @@
 *.jpeg binary
 
 # Preserve byte-level provenance across checkout platforms.
-/configs/splits/*.csv -text
-/logs/aditi_5id/original/*.csv -text
-/src/pipeline.py -text
-/notebooks/milestone*.ipynb -text
+/project/configs/splits/*.csv -text
+/project/archive/*.csv -text
+/project/src/pipeline.py -text
+/project/archive/*.ipynb -text
 *.pdf binary
