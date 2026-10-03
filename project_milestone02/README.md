@@ -8,10 +8,12 @@
 
 ```sh
 pip install -r project_milestone02/requirements.txt
-python project_milestone02/m2_dataset.py          # or run the notebook top to bottom
+python project_milestone02/m2_dataset.py
 ```
 
-All randomness is seeded. Two builds produced byte-identical files (1,156 files compared). Building takes about 30 seconds on a laptop CPU, and the YuNet face-detector model (230 KB) is downloaded once and checked against a pinned SHA-256. The script replaces `dataset/` completely.
+To run the notebook instead, also install Jupyter (`pip install jupyter`), then run `jupyter nbconvert --to notebook --execute --inplace project_milestone02/milestone02_dataset_pipeline.ipynb`.
+
+All randomness is seeded. Rebuilding with the script from a fresh clone in a new environment produced byte-identical files (1,156 files compared). Building takes about 30 seconds on a laptop CPU, and the YuNet face-detector model (230 KB) is downloaded once and checked against a pinned SHA-256. The script replaces `dataset/` completely.
 
 ## Contents
 
