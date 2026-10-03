@@ -48,3 +48,6 @@ events.out.tfevents.*
 !/data/identities/**
 !/project/models/group1_repro_v1/
 !/project/models/group1_repro_v1/*.pt
+
+# Ultralytics label caches created when Milestone 3 reads the dataset
+/project_milestone02/dataset/**/labels.cache

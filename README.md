@@ -16,6 +16,7 @@ We trained three models to recognize five celebrities from photos. ResNet18 perf
 | **notebooks/** | The five numbered steps of the project |
 | **data/** | The photos used for training and testing |
 | **project/** | Supporting code, saved models, logs and original team notebooks |
+| **project_milestone02/** | Milestone 2 detection dataset, its notebook and documentation |
 
 ## Results
 
@@ -40,3 +41,11 @@ We selected five identities from the shared class collection, with enough photos
 | 4428 | 23 | David Fung | 4 |
 
 We use 23 photos per person: 17 for training, 3 for validation and 3 for testing. Six remaining photos are unused.
+
+## Milestone 2 detection dataset
+
+The synthetic multi-celebrity dataset for YOLOv8 is in [`project_milestone02/dataset/`](project_milestone02/dataset/): 576 images (504 train / 36 val / 36 test), 1,820 labelled faces, 33 MB, in YOLO format with `data.yaml`. Each frame shows 2-5 of the five Milestone 1 identities, and the split is made by source photo, so no face photo appears in more than one split.
+
+- Build or read it step by step: [milestone02_dataset_pipeline.ipynb](project_milestone02/milestone02_dataset_pipeline.ipynb)
+- Split counts, augmentation parameters and design choices: [project_milestone02/README.md](project_milestone02/README.md)
+- Rebuild: `pip install -r project_milestone02/requirements.txt`, then `python project_milestone02/m2_dataset.py`

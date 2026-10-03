@@ -1,0 +1,11 @@
+# YOLOv8 dataset config. Paths are relative to this file's folder.
+train: train/images
+val: val/images
+test: test/images
+nc: 5
+names:
+  0: '7007'
+  1: '2970'
+  2: '2336'
+  3: '7'
+  4: '4428'

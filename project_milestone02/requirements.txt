@@ -1,0 +1,11 @@
+# Milestone 2 dataset pipeline (tested with Python 3.13, macOS, CPU). PyTorch is not needed.
+opencv-python-headless==5.0.0.93
+albumentations==2.0.8
+numpy==2.5.3
+pandas==3.0.6
+Pillow==12.3.0
+matplotlib==3.11.2
+# to run the notebook:
+nbformat==5.11.1
+nbclient==0.11.0
+ipykernel==7.3.0

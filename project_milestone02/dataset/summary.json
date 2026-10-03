@@ -1,0 +1,68 @@
+{
+  "splits": {
+    "train": {
+      "images": 504,
+      "composed": 168,
+      "augmented": 336,
+      "faces": 1596,
+      "faces_per_identity": {
+        "7007": 321,
+        "2970": 348,
+        "2336": 318,
+        "7": 306,
+        "4428": 303
+      }
+    },
+    "val": {
+      "images": 36,
+      "composed": 36,
+      "augmented": 0,
+      "faces": 111,
+      "faces_per_identity": {
+        "7007": 21,
+        "2970": 26,
+        "2336": 20,
+        "7": 24,
+        "4428": 20
+      }
+    },
+    "test": {
+      "images": 36,
+      "composed": 36,
+      "augmented": 0,
+      "faces": 113,
+      "faces_per_identity": {
+        "7007": 24,
+        "2970": 23,
+        "2336": 24,
+        "7": 23,
+        "4428": 19
+      }
+    }
+  },
+  "source_photos_used": {
+    "train": 85,
+    "val": 19,
+    "test": 17
+  },
+  "source_photos_shared_between_splits": 0,
+  "duplicate_images": 0,
+  "composed_proportions": {
+    "train": 0.7,
+    "val": 0.15,
+    "test": 0.15
+  },
+  "dataset_mb": 32.6,
+  "regenerated": {
+    "train": {
+      "layout_rejected": 61,
+      "annotation_rejected": 1
+    },
+    "val": {
+      "layout_rejected": 11
+    },
+    "test": {
+      "layout_rejected": 14
+    }
+  }
+}
