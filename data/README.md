@@ -1,10 +1,8 @@
 # Photos
 
-`identities/` contains the 121 photos from the shared class collection. We use 23 per identity: 17 training, 3 validation and 3 test photos. Six photos are unused.
+`identities/` contains 121 photos from the shared class collection. See the [main README](../README.md) for identity IDs and contributor credits.
 
-The identities and contributor credits are listed in the [main README](../README.md).
+- **Milestone 1:** 115 photos, with 17 training, 3 validation and 3 test photos per identity. The [saved split](../project/configs/splits/group1_repro_v1_seed47.csv) lists them.
+- **Milestone 2:** all 121 photos. The [source split](../project_milestone02/dataset/source_split.csv) keeps the Milestone 1 assignments and adds the remaining photos to validation and test.
 
-- [Image inventory](../project/configs/dataset_source.json): source locations and file checksums.
-- [Saved split](../project/configs/splits/group1_repro_v1_seed47.csv): the exact 115 photos used for training, validation and testing.
-
-All photos needed for this experiment are included. The saved models expect RGB images cropped to 224 x 224 pixels with ImageNet normalization; the notebooks apply this automatically.
+The [image inventory](../project/configs/dataset_source.json) records source locations and file hashes. Each milestone's notebook applies its own image preparation steps.

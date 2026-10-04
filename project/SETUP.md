@@ -1,4 +1,6 @@
-# Run the project
+# Run Milestone 1
+
+For the detection dataset, use the [Milestone 2 guide](../project_milestone02/README.md).
 
 Run these commands from the main repository folder in Windows PowerShell. Use Python 3.13.9. These instructions have been tested on Windows; other systems may need different package versions.
 

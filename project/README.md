@@ -1,4 +1,4 @@
-# Supporting files
+# Milestone 1 supporting files
 
 Follow the [setup guide](SETUP.md) to run the project. The numbered notebooks are the main workflow; you do not need to open each helper script.
 
@@ -10,6 +10,6 @@ Follow the [setup guide](SETUP.md) to run the project. The numbered notebooks ar
 | `models/` | Saved trained models |
 | `logs/` | Training loss, accuracy and settings |
 | `results/` | Evaluation tables, predictions and charts |
-| `archive/` | Original team notebooks and earlier training records |
+| `archive/` | Original team notebooks, earlier training records and the Milestone 2 prototype |
 
 `group1_repro_v1` is the experiment used in the report. That name connects its models, logs and results. The chosen model is `models/group1_repro_v1/resnet18_frozen_backbone.pt`.

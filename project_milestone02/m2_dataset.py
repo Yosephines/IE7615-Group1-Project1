@@ -65,20 +65,20 @@ MIN_FACE_PX = 36
 
 AUGMENTATIONS = [
     # (transform, parameters, reason) - documented in the notebook and README
-    ("HorizontalFlip", "p=0.5", "Faces are left-right symmetric and identity does not depend on side; doubles pose variety."),
-    ("Affine", "scale 0.85-1.15, translate +/-5%, rotate +/-7 deg, p=0.8",
-     "Camera distance, framing and slight head/camera tilt. Small angles keep boxes tight (ellipse-based box rotation)."),
-    ("RandomBrightnessContrast", "brightness +/-0.2, contrast +/-0.2, p=0.7", "Indoor lighting and exposure differences."),
-    ("HueSaturationValue", "hue +/-5, saturation +/-15, value +/-10, p=0.4", "White balance and camera colour differences, kept small so skin tones stay plausible."),
-    ("RandomGamma", "gamma 85-115, p=0.3", "Non-linear exposure differences."),
-    ("GaussianBlur or MotionBlur", "kernel 3-5 / 3-7, p=0.25", "Slight defocus or hand shake in group photos."),
-    ("GaussNoise", "std 0.01-0.04, p=0.25", "Sensor noise in dim rooms."),
-    ("ImageCompression", "JPEG quality 60-95, p=0.3", "Compression artefacts from phones and messaging apps."),
+    ("Horizontal flip", "p=0.5", "Left/right variation."),
+    ("Scale, shift and rotation", "scale 0.85-1.15, translate +/-5%, rotate +/-7 deg, p=0.8",
+     "Different framing and slight tilt."),
+    ("Brightness and contrast", "brightness +/-0.2, contrast +/-0.2, p=0.7", "Lighting variation."),
+    ("Hue, saturation and value", "hue +/-5, saturation +/-15, value +/-10, p=0.4", "Small colour changes."),
+    ("Gamma", "gamma 85-115, p=0.3", "Exposure variation."),
+    ("Gaussian or motion blur", "kernel 3-5 / 3-7, p=0.25", "Focus and motion."),
+    ("Noise", "std 0.01-0.04, p=0.25", "Camera noise."),
+    ("JPEG compression", "JPEG quality 60-95, p=0.3", "Compression effects."),
 ]
 NOT_USED = [
-    ("Vertical flip / large rotation", "Upside-down or strongly rotated faces do not occur in group photos and loosen boxes."),
-    ("Cutout / random erasing", "Could hide a labelled face and leave a wrong label."),
-    ("Mosaic / mixup", "Applied online by YOLOv8 during Milestone 3 training; doing it offline would duplicate it."),
+    ("Vertical flip / large rotation", "Poor fit for our group scenes."),
+    ("Cutout / random erasing", "Could hide a labelled face."),
+    ("Mosaic / mixup", "Leave image mixing to the Milestone 3 training settings."),
 ]
 
 

@@ -1,24 +1,23 @@
 # IE 7615 - Group 1 - Project 1
 
-We trained three models to recognize five celebrities from photos. ResNet18 performed best, identifying 10 of 15 test photos correctly.
+We are building a system that recognizes celebrities and locates their faces in group images.
 
 ## Start here
 
-1. **Read the [Proposal and training results](output%20and%20pdf/proposal_and_training_results.pdf).** It brings the proposal, results and charts into one document.
-2. **Open [notebooks 01-05](notebooks/README.md)** to follow the work from data preparation to evaluation. They already include results.
-3. **To run the code**, follow the [setup guide](project/SETUP.md). You do not need to run each script separately.
+- **Milestone 2:** Open the [dataset notebook](project_milestone02/milestone02_dataset_pipeline.ipynb). It shows how we build group images, label faces and split the data. The examples and results are saved in the notebook. See the [Milestone 2 guide](project_milestone02/README.md) to run it.
+- **Milestone 1:** Read the [proposal and training results](output%20and%20pdf/proposal_and_training_results.pdf). Follow [notebooks 01-05](notebooks/README.md) for the classification work, or the [setup guide](project/SETUP.md) to run it.
 
-## What is in each folder?
+## Folders
 
-| Folder | What to look for |
+| Folder | Contents |
 | --- | --- |
-| **output and pdf/** | The combined report, plus separate proposal and results PDFs |
-| **notebooks/** | The five numbered steps of the project |
-| **data/** | The photos used for training and testing |
-| **project/** | Supporting code, saved models, logs and original team notebooks |
-| **project_milestone02/** | Milestone 2 detection dataset, its notebook and documentation |
+| `project_milestone02/` | Main detection-data notebook, finished dataset and supporting code |
+| `notebooks/` | Milestone 1 classification notebooks |
+| `output and pdf/` | Milestone 1 proposal and training results |
+| `data/` | Original celebrity photos used by both milestones |
+| `project/` | Milestone 1 code and results, plus archived team work |
 
-## Results
+## Milestone 1 results
 
 | Model | Correct test photos | Accuracy |
 | --- | --- | --- |
@@ -40,12 +39,4 @@ We selected five identities from the shared class collection, with enough photos
 | 7 | 24 | Jin-woo Hong | 2 |
 | 4428 | 23 | David Fung | 4 |
 
-We use 23 photos per person: 17 for training, 3 for validation and 3 for testing. Six remaining photos are unused.
-
-## Milestone 2 detection dataset
-
-The synthetic multi-celebrity dataset for YOLOv8 is in [`project_milestone02/dataset/`](project_milestone02/dataset/): 576 images (504 train / 36 val / 36 test), 1,820 labelled faces, 33 MB, in YOLO format with `data.yaml`. Each frame shows 2-5 of the five Milestone 1 identities, and the split is made by source photo, so no face photo appears in more than one split.
-
-- Build or read it step by step: [milestone02_dataset_pipeline.ipynb](project_milestone02/milestone02_dataset_pipeline.ipynb)
-- Split counts, augmentation parameters and design choices: [project_milestone02/README.md](project_milestone02/README.md)
-- Rebuild: `pip install -r project_milestone02/requirements.txt`, then `python project_milestone02/m2_dataset.py`
+Milestone 1 uses 23 photos per person: 17 for training, 3 for validation and 3 for testing. Milestone 2 keeps those assignments and adds the six remaining photos to validation and test.

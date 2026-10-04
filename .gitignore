@@ -51,3 +51,5 @@ events.out.tfevents.*
 
 # Ultralytics label caches created when Milestone 3 reads the dataset
 /project_milestone02/dataset/**/labels.cache
+
+.venv-m2/

@@ -1,6 +1,6 @@
-# Start with notebook 01
+# Milestone 1 notebooks
 
-These five notebooks are the main workflow. Each includes completed output, so you can read it without rerunning training.
+Start with notebook 01 below. These notebooks cover the classification work. Each includes completed output, so you can read it without rerunning training.
 
 | Order | Notebook | What it does |
 | --- | --- | --- |
@@ -15,3 +15,5 @@ To run them, use the [setup guide](../project/SETUP.md). Choose a new experiment
 These numbered notebooks were created by separating Dario's data preparation and training work and Aditi's evaluation work into the required steps. Their saved outputs come from the new Group 1 training run.
 
 Shared code is in `project/src/`. Dario's and Aditi's original combined notebooks are preserved unchanged in `project/archive/`.
+
+For the detection dataset, open the [Milestone 2 notebook](../project_milestone02/milestone02_dataset_pipeline.ipynb).
