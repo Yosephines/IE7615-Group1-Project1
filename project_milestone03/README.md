@@ -2,13 +2,22 @@
 
 Start with the [results report](../output%20and%20pdf/milestone03_detection_results.pdf). It covers Aditi's model, the test scores, loss curves and TA image check.
 
-Dario's sweep summary is still needed to complete the comparison between training runs.
+Dario's inference sweep and detection gallery are available in the
+[hyperparameter notebook](milestone03_hyperparameters_and_gallery.ipynb).
+See [the sweep guide](HYPERPARAMETERS.md) for inputs, methods, outputs and verification.
+It compares confidence and NMS thresholds using one fixed checkpoint, with validation-only
+selection. Numerical sweep results still require Aditi's trained `best.pt`, which is not
+included in the supplied project ZIP.
 
 ## Files
 
 | File or folder | Purpose |
 | --- | --- |
 | `evaluate.py` | Runs the evaluation and builds the report |
+| `hyperparameter_sweep.py` | Runs Dario's threshold comparison and annotated test gallery |
+| `milestone03_hyperparameters_and_gallery.ipynb` | Colab walkthrough for Dario's section |
+| `HYPERPARAMETERS.md` | Sweep method, required checkpoint and handoff instructions |
+| `test_hyperparameter_sweep.py` | Metric and dataset regression checks |
 | `results/` | Metrics, original training log and training settings |
 
 ## Run again

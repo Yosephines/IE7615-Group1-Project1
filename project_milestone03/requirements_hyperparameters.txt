@@ -1,0 +1,8 @@
+# Inference sweep and detection gallery. Python 3.12 or 3.13.
+# Keep the existing Colab PyTorch/CUDA installation; use CPU PyTorch locally if needed.
+ultralytics==8.4.174
+numpy>=1.26,<3
+pandas>=2.2,<4
+matplotlib>=3.8,<4
+Pillow>=10,<13
+PyYAML>=6,<7
