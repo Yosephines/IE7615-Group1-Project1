@@ -4,6 +4,7 @@ We are building a system that recognizes celebrities and locates their faces in 
 
 ## Start here
 
+- **Milestone 3 — Dario:** Open the [hyperparameter and gallery notebook](project_milestone03/milestone03_hyperparameters_and_gallery.ipynb). See the [sweep guide](project_milestone03/HYPERPARAMETERS.md) for the required trained checkpoint and execution status.
 - **Milestone 2:** Open the [dataset notebook](project_milestone02/milestone02_dataset_pipeline.ipynb). It shows how we build group images, label faces and split the data. The examples and results are saved in the notebook. See the [Milestone 2 guide](project_milestone02/README.md) to run it.
 - **Milestone 1:** Read the [proposal and training results](output%20and%20pdf/proposal_and_training_results.pdf). Follow [notebooks 01-05](notebooks/README.md) for the classification work, or the [setup guide](project/SETUP.md) to run it.
 
@@ -12,6 +13,7 @@ We are building a system that recognizes celebrities and locates their faces in 
 | Folder | Contents |
 | --- | --- |
 | `project_milestone02/` | Main detection-data notebook, finished dataset and supporting code |
+| `project_milestone03/` | Baseline detection evaluation, hyperparameter sweep and visualization gallery code |
 | `notebooks/` | Milestone 1 classification notebooks |
 | `output and pdf/` | Milestone 1 proposal and training results |
 | `data/` | Original celebrity photos used by both milestones |
