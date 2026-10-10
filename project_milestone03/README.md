@@ -65,7 +65,13 @@ python project_milestone03/hyperparameter_sweep.py --checkpoint project_mileston
 
 Compare `tmp/m3_reproduce/test_metrics.csv` and `per_class_metrics.csv` with the committed [`dario_sweep_20261010_010347_535395`](results/dario_sweep_20261010_010347_535395/) run. On macOS ARM CPU we got the same selected settings and identical counts, precision, recall and F1 for them. mAP@0.5 differed in the fourth decimal (0.9616 vs 0.9623) and mean matched IoU by less than 0.0001, because floating-point results vary slightly by platform.
 
-`evaluate.py` rebuilds the PDF report. It also needs Aditi's training ZIP, the training notebook and the TA image, which are not in the repo:
+Rebuild the PDF report from the committed results without re-running the model:
+
+```sh
+python project_milestone03/evaluate.py --report-only --sweep-summary project_milestone03/results/dario_sweep_20261010_010347_535395/run_summary.json
+```
+
+Full re-evaluation with `evaluate.py` replaces `results/metrics.json` and also needs Aditi's training ZIP and the TA image, which are not in the repo:
 
 ```sh
 python project_milestone03/evaluate.py --training-zip milestone03_training_results.zip --ta-image testimage.jpeg \

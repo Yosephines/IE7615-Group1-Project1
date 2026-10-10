@@ -38,4 +38,4 @@ python project_milestone03/demo.py --image project_milestone03/results/ta_image_
 python project_milestone03/demo.py --image project_milestone03/results/ta_image_check/ta_test_image.png --agnostic-nms --output tmp/demo/ta_agnostic.jpg
 ```
 
-The image here is a 640×640 PNG copy of the TA's `testimage.jpeg`. Its detections match the description in the results report: nine faces boxed, with overlapping different IDs on the middle-centre and middle-right faces.
+The image here is a 640×640 PNG copy of the TA's `testimage.jpeg`. It gives the same 11 boxes and IDs as the original, which `results/metrics.json` records; confidences differ by up to 0.02 (for example 0.60 here and 0.58 on the original for the middle-centre 7 box). The results report quotes the original's values.
