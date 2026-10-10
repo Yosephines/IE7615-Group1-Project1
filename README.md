@@ -4,7 +4,7 @@ We are building a system that recognizes celebrities and locates their faces in 
 
 ## Start here
 
-- **Milestone 3 — Dario:** Open the [hyperparameter and gallery notebook](project_milestone03/milestone03_hyperparameters_and_gallery.ipynb). See the [sweep guide](project_milestone03/HYPERPARAMETERS.md) for the required trained checkpoint and execution status.
+- **Milestone 3:** Read the [detection results](output%20and%20pdf/milestone03_detection_results.pdf), then follow the [Milestone 3 guide](project_milestone03/README.md). It covers the [live demo](project_milestone03/demo.py), the [trained YOLOv8n checkpoint](project_milestone03/models/best.pt), the [hyperparameter sweep](project_milestone03/results/dario_sweep_20261010_010347_535395/hyperparameter_summary.md) and the [annotated gallery](project_milestone03/results/dario_sweep_20261010_010347_535395/gallery/README.md).
 - **Milestone 2:** Open the [dataset notebook](project_milestone02/milestone02_dataset_pipeline.ipynb). It shows how we build group images, label faces and split the data. The examples and results are saved in the notebook. See the [Milestone 2 guide](project_milestone02/README.md) to run it.
 - **Milestone 1:** Read the [proposal and training results](output%20and%20pdf/proposal_and_training_results.pdf). Follow [notebooks 01-05](notebooks/README.md) for the classification work, or the [setup guide](project/SETUP.md) to run it.
 
@@ -13,11 +13,30 @@ We are building a system that recognizes celebrities and locates their faces in 
 | Folder | Contents |
 | --- | --- |
 | `project_milestone02/` | Main detection-data notebook, finished dataset and supporting code |
-| `project_milestone03/` | Baseline detection evaluation, hyperparameter sweep and visualization gallery code |
+| `project_milestone03/` | YOLOv8 checkpoint, live demo, detection evaluation, hyperparameter sweep and gallery |
 | `notebooks/` | Milestone 1 classification notebooks |
-| `output and pdf/` | Milestone 1 proposal and training results |
+| `output and pdf/` | Milestone 1 proposal and training results, Milestone 3 detection results |
 | `data/` | Original celebrity photos used by both milestones |
 | `project/` | Milestone 1 code and results, plus archived team work |
+
+## Milestone 3 results
+
+| Metric (held-out test, 36 scenes, 113 faces) | Score |
+| --- | --- |
+| mAP@0.5 | 0.962 |
+| mAP@0.5:0.95 | 0.862 |
+| Precision | 0.929 |
+| Recall | 0.920 |
+| Mean IoU of correct matches | 0.932 |
+
+YOLOv8n fine-tuned for 50 epochs. Confidence 0.50 and NMS IoU 0.70 were selected on validation. Run the demo or reproduce these numbers:
+
+```sh
+python project_milestone03/demo.py
+python project_milestone03/hyperparameter_sweep.py --checkpoint project_milestone03/models/best.pt --output tmp/m3_reproduce
+```
+
+See the [Milestone 3 guide](project_milestone03/README.md) for setup and per-identity results.
 
 ## Milestone 1 results
 

@@ -4,11 +4,11 @@ Open [milestone03_hyperparameters_and_gallery.ipynb](milestone03_hyperparameters
 
 ## Required input
 
-The project contains the full Milestone 2 dataset, but the supplied project ZIP **does not contain Aditi's YOLOv8 checkpoint**. The three `.pt` files under `project/models/` are Milestone 1 classification models and cannot be used for detection.
+Aditi's trained checkpoint is committed as [`models/best.pt`](models/best.pt). The three `.pt` files under `project/models/` are Milestone 1 classification models and cannot be used for detection.
 
 Provide either:
 
-- Aditi's `best.pt`, or
+- `--checkpoint project_milestone03/models/best.pt`, or
 - `milestone03_training_results.zip`, containing one `best.pt` at any directory depth.
 
 The existing evaluation identifies Aditi's checkpoint by SHA-256:

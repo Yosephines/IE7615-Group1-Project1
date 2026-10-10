@@ -1,0 +1,3 @@
+# Live demo. Installs the sweep/evaluation stack plus Gradio. Python 3.12 or 3.13.
+-r requirements_hyperparameters.txt
+gradio==6.30.0

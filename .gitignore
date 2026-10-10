@@ -55,3 +55,6 @@ events.out.tfevents.*
 .venv-m2/
 
 .venv-m3/
+
+# Final Milestone 3 YOLOv8n detector (6 MB), committed so the demo and metrics reproduce
+!/project_milestone03/models/best.pt

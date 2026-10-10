@@ -25,16 +25,14 @@ The smoke execution took approximately 24 seconds on this CPU environment. That 
 
 The notebook preserves Colab's existing PyTorch/CUDA installation and records the environment of each actual run. Interactive Colab uploads and the Colab download UI were not exercised in this local verification.
 
-## Pending trained-model execution
+## Trained-model execution
 
-The supplied project ZIP does not include Aditi's `best.pt` or `milestone03_training_results.zip`. Only metrics, the training log and training settings are present under `project_milestone03/results/`. Milestone 1 `.pt` files are classification checkpoints and are unsuitable for this detection sweep.
+The sweep was then run on Aditi's trained checkpoint, now committed as [`models/best.pt`](models/best.pt) (SHA-256 `64f5686b5a7760fee18cf215b1e29f4aa5af95dc90fbf0b571635ed08aa1d2e6`, matching the baseline reference). The results are in [`results/dario_sweep_20261010_010347_535395/`](results/dario_sweep_20261010_010347_535395/). The untrained smoke outputs and the rendering fixture above are software checks, not submission results.
 
-**No sweep scores from Aditi's trained model or final detection gallery are claimed yet.** The untrained smoke outputs and the rendering fixture are excluded from the deliverable project archive. They are software checks, not submission results.
+On October 9, 2026 the run was repeated from the committed checkpoint on macOS ARM CPU (Python 3.13.15, Ultralytics 8.4.174, PyTorch 2.14.0) in 24 seconds:
 
-Provide the checkpoint or training-results ZIP and run the notebook to generate the final numerical comparison and annotated gallery. The script records checkpoint SHA-256 and whether it matches the baseline reference:
-
-```text
-64f5686b5a7760fee18cf215b1e29f4aa5af95dc90fbf0b571635ed08aa1d2e6
+```sh
+python project_milestone03/hyperparameter_sweep.py --checkpoint project_milestone03/models/best.pt --output tmp/m3_reproduce
 ```
 
-If a different trained checkpoint is supplied, the baseline and selected settings are evaluated again for that checkpoint; historical scores are not reused as results of the new run.
+Validation selected the same settings (`conf_0.50_iou_0.70_aware`). On test, the selected settings reproduced the committed true/false positive and miss counts, precision, recall and F1 exactly; mean matched IoU differed by less than 0.0001. mAP@0.5 was 0.9616 instead of 0.9623 and mAP@0.5:0.95 was 0.8615 instead of 0.8623; the baseline had 11 false positives instead of 12. These are floating-point differences between platforms and do not change any conclusion.
