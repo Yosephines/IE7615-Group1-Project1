@@ -2,12 +2,7 @@
 
 Start with the [results report](../output%20and%20pdf/milestone03_detection_results.pdf). It covers Aditi's model, the test scores, loss curves and TA image check.
 
-Dario's inference sweep and detection gallery are available in the
-[hyperparameter notebook](milestone03_hyperparameters_and_gallery.ipynb).
-See [the sweep guide](HYPERPARAMETERS.md) for inputs, methods, outputs and verification.
-It compares confidence and NMS thresholds using one fixed checkpoint, with validation-only
-selection. Numerical sweep results still require Aditi's trained `best.pt`, which is not
-included in the supplied project ZIP.
+The [completed sweep notebook](milestone03_hyperparameters_and_gallery.ipynb) includes the comparison and gallery. The report now compares the baseline with settings selected on validation.
 
 ## Files
 
@@ -40,7 +35,8 @@ $inputFolder = "C:\path\to\Milestone3"
 python project_milestone03/evaluate.py `
   --training-zip "$inputFolder\milestone03_training_results.zip" `
   --ta-image "$inputFolder\testimage.jpeg" `
-  --training-notebook "$inputFolder\milestone03_yolov8_training (1).ipynb"
+  --training-notebook "$inputFolder\milestone03_yolov8_training (1).ipynb" `
+  --sweep-summary "project_milestone03/results/dario_sweep_20261010_010347_535395/run_summary.json"
 ```
 
 This evaluates the saved model without retraining. It replaces the evaluation results and Milestone 3 report. The original input files stay unchanged.

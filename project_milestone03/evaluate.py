@@ -141,7 +141,7 @@ def make_curves(log, target, selected):
     fig.tight_layout();fig.savefig(target,dpi=180,bbox_inches='tight');plt.close(fig)
 
 
-def build_report(summary, result_dir, report_dir):
+def build_report(summary, result_dir, report_dir, sweep=None):
     from reportlab.lib import colors
     from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
     from reportlab.lib.enums import TA_LEFT
@@ -153,22 +153,31 @@ def build_report(summary, result_dir, report_dir):
     scores = test['fixed_confidence']['overall']
     train = summary['training']
     pct = lambda value: f'{100 * value:.1f}%'
+    selected = next((row for row in sweep['test'] if row['config_id'] == sweep['selection']['config_id']), None) if sweep else None
     table_rows = [
-        ['Metric', 'Test result'],
+        ['Metric', 'Baseline', 'Selected settings'] if selected else ['Metric', 'Test result'],
         ['mAP@0.5', pct(test['standard']['map50'])],
         ['mAP@0.5:0.95', pct(test['standard']['map50_95'])],
         ['Precision', pct(scores['precision'])],
         ['Recall', pct(scores['recall'])],
         ['Mean IoU of correct matches', f'{scores["mean_matched_iou"]:.3f}'],
     ]
+    if selected:
+        for row, value in zip(table_rows[1:], [pct(selected['map50']), pct(selected['map50_95']),
+                              pct(selected['precision']), pct(selected['recall']), f"{selected['mean_matched_iou']:.3f}"]):
+            row.append(value)
     intro = ('We tested Aditi\'s saved YOLOv8n model on the held-out Milestone 2 dataset: '
              '36 images containing 113 labelled faces.')
-    method = ('Precision and recall use confidence 0.25. A correct match needs the right identity '
-              'and box overlap (IoU) of at least 0.50. Mean IoU describes how closely the correct boxes fit; '
-              'it excludes missed faces and false alarms.')
+    method = ('A correct match needs the right identity and box overlap (IoU) of at least 0.50. '
+              'Mean IoU measures only correct matches, excluding misses and false alarms.')
+    if selected:
+        method += ' mAP uses the full confidence curve, so changing the reporting cutoff alone does not change it.'
+    else:
+        method += ' Precision and recall use confidence 0.25.'
     interpretation = [
-        'The model found and labelled most faces correctly. Some errors were wrong identities or extra '
-        'predictions around a face. The lower score under stricter overlap requirements shows that box placement still has room to improve.',
+        ('The selected settings produced fewer false alarms, with a small increase in missed faces. '
+         'The model weights stayed the same; only the prediction settings were compared.' if selected else
+         'The model found and labelled most faces correctly. Some errors were wrong identities or extra predictions around a face.'),
         'These results apply to synthetic scenes made from a small set of repeated photos. The labels were '
         'generated with a face detector. Strong scores here do not guarantee the same performance on real group photos.',
     ]
@@ -178,10 +187,17 @@ def build_report(summary, result_dir, report_dir):
               'The dotted line marks the selected checkpoint.')
     ta_check = ('The model placed boxes around all nine faces in the TA image. However, the middle-centre '
                 'and middle-right faces each received overlapping predictions with different IDs.')
+    if selected:
+        ta_check = 'Using the selected settings, ' + ta_check[0].lower() + ta_check[1:]
     ta_limit = ('No reference identity labels or boxes were supplied, so this is a visual check rather than '
                 'a scored test. The model can output only its trained identities; a confident prediction can still be wrong.')
-    pending = ('Dario\'s hyperparameter sweep results are still needed to compare training settings. '
-               'This report currently covers Aditi\'s baseline only. If the team selects another model, its test results will need to replace these.')
+    sweep_text = ('Dario\'s code compared 24 prediction settings on validation, without retraining. '
+                  'The choice balanced precision and recall using F1. Only the baseline and selected settings '
+                  'were then checked on test.') if sweep else 'The hyperparameter comparison is not included in this run.'
+    sweep_rows = [['Setting', 'Compared', 'Selected'],
+                  ['Confidence cutoff', '0.10, 0.25, 0.50, 0.75', f"{selected['confidence']:.2f}"],
+                  ['Duplicate-box overlap (NMS IoU)', '0.30, 0.50, 0.70', f"{selected['nms_iou']:.2f}"],
+                  ['Duplicate filtering', 'Within each ID / across IDs', 'Within each ID' if not selected['agnostic_nms'] else 'Across IDs']] if selected else []
 
     styles = getSampleStyleSheet()
     styles.add(ParagraphStyle(name='Simple', fontName='Helvetica', fontSize=10, leading=14,
@@ -203,7 +219,7 @@ def build_report(summary, result_dir, report_dir):
     paragraph('IE 7615 - Group 1 | Evaluation and report: Yosephine Tong', 'Note')
     paragraph(intro)
     cells = [[Paragraph(value, styles['Simple']) for value in row] for row in table_rows]
-    table = Table(cells, colWidths=[340, 164], hAlign='LEFT')
+    table = Table(cells, colWidths=[260, 122, 122] if selected else [340, 164], hAlign='LEFT')
     table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#e6edf1')),
         ('VALIGN', (0, 0), (-1, -1), 'TOP'),
@@ -213,6 +229,8 @@ def build_report(summary, result_dir, report_dir):
         ('LINEBELOW', (0, 0), (-1, -1), .3, colors.HexColor('#dce3e7')),
     ]))
     story.extend([table, Spacer(1, 9)])
+    if selected:
+        paragraph(f"Confidence cutoffs: baseline 0.25; selected {selected['confidence']:.2f}.", 'Note')
     paragraph(method, 'Note')
     for text in interpretation:
         paragraph(text)
@@ -221,20 +239,27 @@ def build_report(summary, result_dir, report_dir):
     story.append(Image(str(result_dir / 'loss_curves.png'), width=504, height=159))
     paragraph(curves, 'Note')
     story.append(PageBreak())
-    paragraph('TA image check', 'Title')
+    paragraph('Hyperparameter comparison', 'Title')
+    paragraph(sweep_text)
+    if sweep_rows:
+        grid = Table([[Paragraph(value, styles['Note']) for value in row] for row in sweep_rows],
+                     colWidths=[200, 200, 104], hAlign='LEFT')
+        grid.setStyle(TableStyle([('BACKGROUND', (0,0), (-1,0), colors.HexColor('#e6edf1')),
+                                 ('VALIGN', (0,0), (-1,-1), 'TOP'),
+                                 ('LINEBELOW', (0,0), (-1,-1), .3, colors.HexColor('#dce3e7'))]))
+        story.extend([grid, Spacer(1, 9)])
+    paragraph('TA image check', 'Heading2')
     paragraph(ta_check)
-    story.append(Image(str(result_dir / 'ta_image_predictions.jpg'), width=340, height=340, hAlign='CENTER'))
+    story.append(Image(str(result_dir / 'ta_image_predictions.jpg'), width=270, height=270, hAlign='CENTER'))
     story.append(Spacer(1, 12))
     paragraph(ta_limit)
-    paragraph('Hyperparameter comparison', 'Heading2')
-    paragraph(pending)
     paragraph('Detailed scores and run settings are saved in project_milestone03/results/.', 'Note')
     paragraph('Metric reference: docs.ultralytics.com/modes/val', 'Note')
 
     def footer(canvas, doc):
         canvas.setFont('Helvetica', 8)
         canvas.setFillColor(colors.HexColor('#61717d'))
-        canvas.drawString(54, 28, 'Group 1 | Aditi baseline evaluation')
+        canvas.drawString(54, 28, 'Group 1 | Detection evaluation')
         canvas.drawRightString(558, 28, str(doc.page))
     SimpleDocTemplate(str(report_dir / 'milestone03_detection_results.pdf'), pagesize=letter,
                       rightMargin=54, leftMargin=54, topMargin=42, bottomMargin=42,
@@ -260,6 +285,7 @@ def main():
     parser.add_argument('--training-zip',type=Path,required=True)
     parser.add_argument('--ta-image',type=Path,required=True)
     parser.add_argument('--training-notebook',type=Path)
+    parser.add_argument('--sweep-summary',type=Path, help='Completed sweep run_summary.json to include in the report.')
     args=parser.parse_args()
     config=ROOT/'tmp/m3_config';config.mkdir(parents=True,exist_ok=True);os.environ['YOLO_CONFIG_DIR']=str(config)
     import numpy as np
@@ -329,14 +355,24 @@ def main():
         (result_dir/'training_history.csv').write_bytes((work/'results.csv').read_bytes())
         (result_dir/'training_args.yaml').write_bytes((work/'args.yaml').read_bytes())
         make_curves(log,detail_dir/'loss_curves.png',selected)
-        ta=model.predict(source=str(args.ta_image.resolve()),imgsz=640,conf=CONF,iou=.7,device='cpu',verbose=False)[0]
+        sweep=json.loads(args.sweep_summary.read_text(encoding='utf-8')) if args.sweep_summary else None
+        ta_config={'confidence':CONF,'nms_iou':.7,'agnostic_nms':False}
+        if sweep:
+            assert sweep['checkpoint_sha256']==summary['checkpoint_sha256'], 'Sweep checkpoint differs.'
+            assert sweep['dataset']['dataset_sha256']==provenance['dataset_sha256'], 'Sweep dataset differs.'
+            assert sweep['selection']['split']=='val', 'Selection must use validation.'
+            ta_config={key:sweep['selection'][key] for key in ta_config}
+            summary['report_sweep']={'file':os.path.relpath(args.sweep_summary,ROOT).replace('\\','/'),
+                                     'sha256':digest(args.sweep_summary),'selected_settings':ta_config}
+        ta=model.predict(source=str(args.ta_image.resolve()),imgsz=640,conf=ta_config['confidence'],
+                         iou=ta_config['nms_iou'],agnostic_nms=ta_config['agnostic_nms'],device='cpu',verbose=False)[0]
         ta.save(filename=str(detail_dir/'ta_image_predictions.jpg'))
         summary['ta_image']={'sha256':digest(args.ta_image),'prediction_count':len(ta.boxes),
                              'boxes_xyxy':ta.boxes.xyxy.tolist(),'class_ids':ta.boxes.cls.int().tolist(),
-                             'confidence':ta.boxes.conf.tolist(),'reference_labels_available':False}
+                             'confidence':ta.boxes.conf.tolist(),'reference_labels_available':False,'settings':ta_config}
         summary['ta_image']['overlapping_predictions']=ta_conflicts(summary['ta_image'],ta.orig_shape)
         save_json(result_dir/'metrics.json',summary)
-        build_report(summary,detail_dir,ROOT/'output and pdf')
+        build_report(summary,detail_dir,ROOT/'output and pdf',sweep=sweep)
         print(json.dumps({'test':summary['test']['fixed_confidence']['overall'],'mAP':summary['test']['standard'],
                           'report':'output and pdf/milestone03_detection_results.pdf'},indent=2))
 

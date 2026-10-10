@@ -1,0 +1,27 @@
+{
+  "selection_split": "val",
+  "rule": "maximum micro-F1, then recall, precision, AP, class-aware mode, baseline proximity",
+  "config_id": "conf_0.50_iou_0.70_aware",
+  "confidence": 0.5,
+  "nms_iou": 0.7,
+  "agnostic_nms": false,
+  "image_size": 640,
+  "validation_metrics": {
+    "config_id": "conf_0.50_iou_0.70_aware",
+    "split": "val",
+    "confidence": 0.5,
+    "nms_iou": 0.7,
+    "agnostic_nms": false,
+    "map50": 0.9720703296703297,
+    "map50_95": 0.8691948900749645,
+    "tp": 99,
+    "fp": 12,
+    "fn": 12,
+    "precision": 0.8918918918918919,
+    "recall": 0.8918918918918919,
+    "f1": 0.8918918918918919,
+    "mean_matched_iou": 0.9313369113332287,
+    "identity_confusions": 10,
+    "conflicting_prediction_pairs": 2
+  }
+}

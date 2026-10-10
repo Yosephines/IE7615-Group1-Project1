@@ -18,7 +18,7 @@
     "shared_source_photos": 0,
     "dataset_sha256": "2b31b489a30f70d1a0f24f75e87641ee137774c87f6c335362c7e6142a99b782"
   },
-  "repository_commit": "ce4f0477f380a28e77207ae08be12548ca7e496c",
+  "repository_commit": "662d0192f9ce1aaf6956f55d0d53283fcd7e9e12",
   "environment": {
     "python": "3.13.9",
     "ultralytics": "8.4.174",
@@ -290,6 +290,15 @@
       }
     ]
   },
+  "report_sweep": {
+    "file": "project_milestone03/results/dario_sweep_20261010_010347_535395/run_summary.json",
+    "sha256": "5189a679361462dde866e5a22b70970d0d21d87080b175dd467d0fc23d7d3449",
+    "selected_settings": {
+      "confidence": 0.5,
+      "nms_iou": 0.7,
+      "agnostic_nms": false
+    }
+  },
   "ta_image": {
     "sha256": "55a9be3a3d24fb899d8cb760d102b5d196bb67dbfe2138f0fbb097f4bed6e3d4",
     "prediction_count": 11,
@@ -388,6 +397,11 @@
       0.5836220979690552
     ],
     "reference_labels_available": false,
+    "settings": {
+      "confidence": 0.5,
+      "nms_iou": 0.7,
+      "agnostic_nms": false
+    },
     "overlapping_predictions": [
       {
         "location": "Middle right",
