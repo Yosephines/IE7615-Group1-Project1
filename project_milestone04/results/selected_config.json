@@ -1,0 +1,33 @@
+{
+  "yolo_weight": 0.5,
+  "unknown_threshold": 0.61,
+  "canvas_factor": 2,
+  "detection": "two_scales",
+  "selection_split": "val",
+  "rule": "maximum (correct names - wrong names) on validation scenes and portraits; ties prefer retry_if_empty, the smaller canvas factor, yolo_weight nearest 0.5, then the lower threshold",
+  "detector": {
+    "confidence": 0.5,
+    "nms_iou": 0.7,
+    "agnostic_nms": true,
+    "image_size": 640
+  },
+  "validation": {
+    "faces": 130,
+    "correct": 112,
+    "wrong": 3,
+    "unknown": 15,
+    "missed": 0,
+    "extra_named": 0,
+    "accuracy": 0.8615384615384616,
+    "precision": 0.9739130434782609
+  },
+  "validation_without_rejection": {
+    "correct": 115,
+    "wrong": 15,
+    "extra_named": 0
+  },
+  "checkpoints_sha256": {
+    "classifier": "e3a8199480649cf8a63b64c0be0491bd4efa45d3d46fa6bab63757b63d8693b3",
+    "detector": "64f5686b5a7760fee18cf215b1e29f4aa5af95dc90fbf0b571635ed08aa1d2e6"
+  }
+}

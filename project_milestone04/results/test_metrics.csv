@@ -1,0 +1,9 @@
+method,set,faces,correct,wrong,unknown,missed,extra_named,extra_unknown,accuracy,precision,net
+YOLOv8n alone (Milestone 3),scenes,113,104,8,0,1,1,0,0.9203539823008849,0.9203539823008849,95
+YOLOv8n alone (Milestone 3),portraits,17,0,1,0,16,0,0,0.0,0.0,-1
+ResNet18 alone (Milestone 1),scenes,113,71,41,0,1,0,0,0.6283185840707964,0.6339285714285714,30
+ResNet18 alone (Milestone 1),portraits,17,11,6,0,0,0,0,0.6470588235294118,0.6470588235294118,5
+"Pipeline, no rejection",scenes,113,104,8,0,1,0,0,0.9203539823008849,0.9285714285714286,96
+"Pipeline, no rejection",portraits,17,16,1,0,0,0,0,0.9411764705882353,0.9411764705882353,15
+Pipeline (final),scenes,113,85,1,26,1,0,0,0.7522123893805309,0.9883720930232558,84
+Pipeline (final),portraits,17,16,0,1,0,0,0,0.9411764705882353,1.0,16

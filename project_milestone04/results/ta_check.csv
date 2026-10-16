@@ -1,0 +1,10 @@
+tile_row,tile_column,truth,identity,confidence,detector,detector_score,classifier,classifier_probability,verdict
+0,0,2336,2336,0.67,2336,0.964,7,0.489,correct
+0,1,not one of the five,7,0.839,7,0.966,7,0.683,wrong name
+0,2,2970,2970,0.773,2970,0.953,2970,0.548,correct
+1,0,not one of the five,7007,0.674,7007,0.887,7007,0.348,wrong name
+1,1,not one of the five,7007,0.616,7007,0.657,7,0.479,wrong name
+1,2,not one of the five,unknown,0.596,7007,0.709,2970,0.569,withheld (unknown person)
+2,0,not one of the five,2970,0.72,2970,0.927,2970,0.443,wrong name
+2,1,not one of the five,unknown,0.602,2970,0.901,2336,0.461,withheld (unknown person)
+2,2,7007,7007,0.953,7007,0.965,7007,0.907,correct

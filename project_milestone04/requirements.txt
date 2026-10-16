@@ -1,0 +1,5 @@
+# Milestone 4 pipeline, demo, evaluation and gallery. Python 3.12 or 3.13, CPU is enough.
+# Install PyTorch first (see README), then: python -m pip install -r project_milestone04/requirements.txt
+# Tested with torch 2.14.0 and torchvision 0.29.0 on macOS ARM CPU.
+-r ../project_milestone03/requirements_demo.txt
+torchvision>=0.29,<0.30

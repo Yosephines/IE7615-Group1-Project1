@@ -1,0 +1,7 @@
+detection,canvas_factor,yolo_weight,unknown_threshold,net,correct,wrong,extra_named,unknown,missed
+retry_if_empty,2,0.5,0.61,108,111,3,0,13,3
+retry_if_empty,3,0.5,0.61,108,110,2,0,15,3
+retry_if_empty,4,0.5,0.61,108,110,2,0,15,3
+two_scales,2,0.5,0.61,109,112,3,0,15,0
+two_scales,3,0.5,0.61,106,107,1,0,20,2
+two_scales,4,0.5,0.61,106,107,1,0,19,3
