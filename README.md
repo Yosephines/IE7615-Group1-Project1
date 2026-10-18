@@ -4,7 +4,7 @@ We are building a system that recognizes celebrities and locates their faces in 
 
 ## Start here
 
-- **Milestone 4 (final):** Follow the [Milestone 4 guide](project_milestone04/README.md). One command detects and names every face in an image: the [YOLOv8n detector](project_milestone03/models/best.pt) finds faces and the [ResNet18 classifier](project/models/group1_repro_v1/resnet18_frozen_backbone.pt) votes on who they are. Try the [live demo](project_milestone04/demo.py), browse the [results gallery](project_milestone04/gallery/README.md) or read the [test results](project_milestone04/results/summary.md).
+- **Milestone 4 (final):** Read the [final report](output%20and%20pdf/milestone04_final_report.pdf), then follow the [Milestone 4 guide](project_milestone04/README.md). One command detects and names every face in an image: the [YOLOv8n detector](project_milestone03/models/best.pt) finds faces and the [ResNet18 classifier](project/models/group1_repro_v1/resnet18_frozen_backbone.pt) votes on who they are. Try the [live demo](project_milestone04/demo.py), browse the [results gallery](project_milestone04/gallery/README.md) or read the [test results](project_milestone04/results/summary.md).
 - **Milestone 3:** Read the [detection results](output%20and%20pdf/milestone03_detection_results.pdf), then follow the [Milestone 3 guide](project_milestone03/README.md). It covers the [live demo](project_milestone03/demo.py), the [trained YOLOv8n checkpoint](project_milestone03/models/best.pt), the [hyperparameter sweep](project_milestone03/results/dario_sweep_20261010_010347_535395/hyperparameter_summary.md) and the [annotated gallery](project_milestone03/results/dario_sweep_20261010_010347_535395/gallery/README.md).
 - **Milestone 2:** Open the [dataset notebook](project_milestone02/milestone02_dataset_pipeline.ipynb). It shows how we build group images, label faces and split the data. The examples and results are saved in the notebook. See the [Milestone 2 guide](project_milestone02/README.md) to run it.
 - **Milestone 1:** Read the [proposal and training results](output%20and%20pdf/proposal_and_training_results.pdf). Follow [notebooks 01-05](notebooks/README.md) for the classification work, or the [setup guide](project/SETUP.md) to run it.
@@ -45,7 +45,7 @@ Regression checks: `python -m unittest discover -s project_milestone04 -p "test_
 | `project_milestone03/` | YOLOv8 checkpoint, Milestone 3 demo, detection evaluation, hyperparameter sweep and gallery |
 | `project_milestone02/` | Main detection-data notebook, finished dataset and supporting code |
 | `notebooks/` | Milestone 1 classification notebooks |
-| `output and pdf/` | Milestone 1 proposal and training results, Milestone 3 detection results |
+| `output and pdf/` | Milestone 1 proposal and training results, Milestone 3 detection results, Milestone 4 final report |
 | `data/` | Original celebrity photos used by all milestones |
 | `project/` | Milestone 1 code, the trained classifiers and results, plus archived team work |
 

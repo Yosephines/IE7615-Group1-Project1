@@ -4,6 +4,7 @@ One command takes an image and returns every face it finds, with a bounding box 
 
 | Deliverable | Where |
 | --- | --- |
+| Final report | [Milestone 4 final report](../output%20and%20pdf/milestone04_final_report.pdf) |
 | Pipeline (library and command line) | [`pipeline.py`](pipeline.py) |
 | Live demo (Gradio) | [`demo.py`](demo.py) |
 | Validation selection and test scores | [`evaluate.py`](evaluate.py), results in [`results/summary.md`](results/summary.md) |
